@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 :root {
     --background: #14151b;
@@ -36,6 +37,8 @@
     --font-sans: Geologica, ui-sans-serif, sans-serif, system-ui;
     --font-serif: Geologica, ui-sans-serif, sans-serif, system-ui;
     --font-mono: Geologica, ui-sans-serif, sans-serif, system-ui;
+    --font-inter: "Inter", sans-serif;
+
     --radius: 0.75rem;
     --shadow-x: 0px;
     --shadow-y: 0px;
@@ -100,6 +103,7 @@
     --font-sans: var(--font-sans);
     --font-mono: var(--font-mono);
     --font-serif: var(--font-serif);
+    --font-inter: var(--font-inter);
 
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
@@ -118,9 +122,13 @@
 
 @layer base {
     * {
-        @apply border-border outline-ring/50 font-mono;
+        @apply border-border outline-ring/50 font-inter;
     }
     body {
         @apply bg-background text-foreground;
     }
+}
+
+nav a.active {
+    @apply text-primary bg-background/30 rounded;
 }
