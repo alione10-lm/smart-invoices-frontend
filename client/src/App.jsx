@@ -1,6 +1,6 @@
 const App = () => {
     return (
-        <div className="text-xl text-indigo-500">
+        <div className="text-primary">
             Smart Invoice Payment Tracking frontend
         </div>
     );
