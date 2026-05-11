@@ -1,0 +1,47 @@
+import Suppliers from "../models/Supplier.js"
+import Invoices from "../models/Invoice.js"
+import { forbidden, notFound, serverError } from "../utils/apiResponse.js";
+
+
+
+export const verifySupplierOwnership = async (req, res, next) => {
+  try {
+    const supplier = await Suppliers.findById(req.params.id);
+
+    if (!supplier) {
+      return notFound(res, 'supplier not found')
+    }
+
+    if (supplier.userId.toString() !== req.user.id) {
+      return forbidden(res)
+    }
+
+    req.supplier = supplier;
+
+    next()
+  } catch (error) {
+    serverError(res, error.message)
+  }
+}
+
+export const verifyIvoiceOwnership = async (req, res, next) => {
+  try {
+    const invoice = await Invoices.findById(req.params.id)
+
+    if (!invoice) {
+      return notFound(res, 'Invoice not found')
+    }
+
+    if (invoice.userId.toString() !== req.user.id) {
+      return forbidden(res)
+    }
+
+    req.invoice = invoice;
+
+    next()
+
+  } catch (error) {
+    serverError(res, error.message)
+  }
+}
+
