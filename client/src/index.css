@@ -132,5 +132,5 @@
 }
 
 aside a.active {
-    @apply text-primary bg-muted rounded;
+    @apply text-primary bg-primary/10 rounded;
 }
