@@ -28,6 +28,8 @@ export const deleteSupplier_s = async (supllier) => {
 export const getAllSupplier_s = async () => {
     const suplliers = await Suppliers.find();
 
+    
+
     return suplliers
 }
 

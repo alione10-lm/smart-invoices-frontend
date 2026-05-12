@@ -129,8 +129,36 @@
     body {
         @apply bg-background text-foreground font-sans;
     }
+
+    .title {
+        @apply text-2xl font-mono mb-4;
+    }
+
+    .button_primary {
+        @apply inline-flex items-center justify-center h-10 gap-2 px-4 py-2 font-mono font-medium text-sm tracking-wide text-popover transition duration-300 rounded-lg focus-visible:outline-none whitespace-nowrap bg-chart-5 hover:bg-chart-4 cursor-pointer disabled:cursor-not-allowed disabled:border-primary disabled:bg-primary disabled:shadow-none;
+    }
 }
 
 aside a.active {
     @apply text-primary bg-primary/10 rounded;
+}
+
+@layer components {
+    .search {
+        @apply flex items-center w-[45%] gap-2 border border-border px-3 py-2 rounded-lg;
+
+            input {
+                @apply bg-transparent outline-none flex-1 ;
+            }
+    }
+
+    .modal-container {
+        & label {
+            @apply font-bold text-muted-foreground ;
+        }
+    }
+}
+
+@utility flex-center {
+    @apply flex items-center justify-center;
 }
