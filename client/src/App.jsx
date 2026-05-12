@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/Layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
+import Suppliers from "./pages/Suppliers";
 
 const App = () => {
     return (
@@ -12,7 +13,7 @@ const App = () => {
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<Dashboard />} />
 
-                    <Route path="/suppliers" element={<h1>Suppliers</h1>} />
+                    <Route path="/suppliers" element={<Suppliers />} />
                     <Route
                         path="/suppliers/:id"
                         element={<h1>Supplier Details</h1>}
