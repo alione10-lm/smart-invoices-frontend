@@ -122,13 +122,13 @@
 
 @layer base {
     * {
-        @apply border-border outline-ring/50 font-inter;
+        @apply border-border outline-ring/50 font-mono;
     }
     body {
         @apply bg-background text-foreground;
     }
 }
 
-nav a.active {
-    @apply text-primary bg-background/30 rounded;
+aside a.active {
+    @apply text-primary bg-muted rounded;
 }

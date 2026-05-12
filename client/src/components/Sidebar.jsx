@@ -19,7 +19,7 @@ const NAVLINKS = {
 
 const Sidebar = () => {
     return (
-        <nav className="w-64 h-screen bg-background  p-4">
+        <aside className="w-64 min-h-screen border-r border-secondary bg-background  p-4">
             <h1 className="my-10">smart invoices</h1>
             {Object.entries(NAVLINKS).map(([key, link]) => (
                 <NavLink
@@ -31,7 +31,7 @@ const Sidebar = () => {
                     {link.name}
                 </NavLink>
             ))}
-        </nav>
+        </aside>
     );
 };
 

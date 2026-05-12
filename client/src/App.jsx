@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/Layouts/AppLayout";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
     return (
@@ -9,7 +10,7 @@ const App = () => {
                 <Route path="/register" element={<h1>register</h1>} />
 
                 <Route element={<AppLayout />}>
-                    <Route path="/" element={<h1>Dashboard</h1>} />
+                    <Route path="/" element={<Dashboard />} />
 
                     <Route path="/suppliers" element={<h1>Suppliers</h1>} />
                     <Route
