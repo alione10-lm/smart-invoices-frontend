@@ -1,5 +1,4 @@
 import { CheckCheck, DollarSign, File, Hourglass } from "lucide-react";
-import { useEffect } from "react";
 
 const dummyData = {
     success: true,

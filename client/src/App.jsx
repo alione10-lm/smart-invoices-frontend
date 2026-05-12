@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/Layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
+import Invoices from "./pages/Invoices";
 
 const App = () => {
     return (
@@ -19,7 +20,7 @@ const App = () => {
                         element={<h1>Supplier Details</h1>}
                     />
 
-                    <Route path="/invoices" element={<h1>Invoices</h1>} />
+                    <Route path="/invoices" element={<Invoices />} />
                     <Route
                         path="/invoices/:id"
                         element={<h1>Invoice Details</h1>}
