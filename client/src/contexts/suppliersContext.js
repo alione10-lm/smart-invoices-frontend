@@ -1,9 +1,11 @@
 import { createContext } from "react";
 
-export const ModalContext = createContext();
+export const ModalContext = createContext(null);
+export const SupplierCreateContext = createContext(null)
 
-// export const ModalProvider = ({ children }) => {
+// const supplierProvider = ({ children }) => {
 //     const [isModalOpen, setIsModalOpen] = createContext(false)
+    
 
 //     return (
 //         <ModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
@@ -11,3 +13,7 @@ export const ModalContext = createContext();
 //         </ModalContext.Provider>
 //     )
 // }
+
+
+
+// export default supplierProvider;

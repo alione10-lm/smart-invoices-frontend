@@ -1,11 +1,12 @@
 import { Mail, Phone } from "lucide-react"
+import { getInitials } from "../../utils/format"
 
 const SupplierCard = (supplier) => {
   return (
     <div className="supplier-card border border-border bg-secondary rounded-lg p-4 text-card-foreground cursor-pointer hover:bg-secondary/80 transition-all duration-75 hover:border-ring hover:scale-1.5">
         <div className="card_header flex items-center mb-5">
             <div className="avatar flex-center w-12 h-12 rounded-full bg-chart-5 text-white font-bold text-lg">
-                MC
+                { getInitials(supplier.name) }
             </div>
 
             <div className="supplier_info ml-4">
