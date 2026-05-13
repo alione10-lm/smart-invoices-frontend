@@ -1,62 +1,55 @@
-import { Eye, Filter, Pen, Plus, Trash } from "lucide-react";
-import StatusTag from "../components/invoices/StatusTag";
-import InvoiceMenu from "../components/invoices/InvoiceMenu";
+import { BrushCleaning, Filter, Plus } from "lucide-react";
 import Modal from "../components/Modal";
 import { CreateInvoiceForm } from "../components/invoices/CreateInvoiceForm";
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-
-const DUMMYDATA = {
-    success: true,
-    message: "Success",
-    data: [
-        {
-            id: "69dcb0b115d4b5705d2c147f",
-            supplierId: {
-                _id: "69dcaf8815d4b5705d2c147e",
-                name: "mch Supplies",
-            },
-            supplierName: "mch Supplies",
-            dueDate: "2026-05-03T00:00:00.000Z",
-            amount: 2500.75,
-            status: "partially_paid",
-            totalpaid: 945,
-            remainingAmount: 1555.75,
-        },
-        {
-            id: "69dcd30ef00e4b289b330c64",
-            supplierId: {
-                _id: "69dcaf8815d4b5705d2c147e",
-                name: "mch Supplies",
-            },
-            supplierName: "mch Supplies",
-            dueDate: "2026-06-01T00:00:00.000Z",
-            amount: 3500.75,
-            status: "paid",
-            totalpaid: 0,
-            remainingAmount: 3500.75,
-        },
-        {
-            id: "69dcd31df00e4b289b330c65",
-            supplierId: {
-                _id: "69dcaf8815d4b5705d2c147e",
-                name: "mch Supplies",
-            },
-            supplierName: "mch Supplies",
-            dueDate: "2024-06-01T00:00:00.000Z",
-            amount: 3500.75,
-            status: "unpaid",
-            totalpaid: 0,
-            remainingAmount: 3500.75,
-        },
-    ],
-};
+import { useEffect } from "react";
+import { fetchInvoices } from "../services/invoicesAPI";
+import InvoiceTable from "../components/invoices/InvoiceTable";
+import InvoiceTableSkeleton from "../components/invoices/InvoiceTableSkeleton";
 
 const Invoices = () => {
     const [showCreateModal, setShowCreateModal] = useState(false);
-
     const [selectedFIlter, setSelectedFilter] = useState("All");
+
+    const [invoices, setInvoices] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const getInvoices = async () => {
+            setLoading(true);
+            try {
+                const { data } = await fetchInvoices();
+
+                setInvoices(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        getInvoices();
+    }, []);
+
+    // useEffect(() => {
+    //     const getSuppliers = async () => {
+    //         try {
+    //             const res = await axios.get("api/suppliers", {
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     ...getAuthHeaders(),
+    //                 },
+    //             });
+    //             const data = await res.data;
+    //             console.log(data);
+    //         } catch (error) {
+    //             console.error("Error fetching suppliers:", error);
+    //         }
+    //     };
+
+    //     getSuppliers();
+    // }, []);
 
     return (
         <div className="">
@@ -99,102 +92,25 @@ const Invoices = () => {
             </div>
 
             <div className="overflow-x-visible rounded shadow-lg bg-secondary border mt-4 border-secondary ">
-                <table className="w-full text-sm text-left">
-                    <thead className=" uppercase text-xs text-muted-foreground tracking-wider">
-                        <tr>
-                            {[
-                                "Supplier",
-                                "Due Date",
-                                "Amount",
-                                "Status",
-                                "Total Paid",
-                                "Remaining Amount",
-                            ].map((h) => (
-                                <th key={h} className="px-6 py-4  ">
-                                    {h}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border ">
-                        {DUMMYDATA.data.map((invoice) => (
-                            <tr key={invoice.id} className="">
-                                <td className="px-6 py-4 font-medium">
-                                    {invoice.supplierName}
-                                </td>
-                                <td className="px-6 py-4">
-                                    {new Date(
-                                        invoice.dueDate,
-                                    ).toLocaleDateString()}
-                                </td>
-                                <td className="px-6 py-4 font-semibold ">
-                                    ${invoice.amount.toFixed(2)}
-                                </td>
-                                <td className="px-6 py-4">
-                                    <StatusTag status={invoice.status} />
-                                </td>
-                                <td className="px-6 py-4 ">
-                                    ${invoice.totalpaid.toFixed(2)}
-                                </td>
-                                <td className="px-6 py-4 font-semibold ">
-                                    ${invoice.remainingAmount.toFixed(2)}
-                                </td>
-                                <td className="px-6 py-4 font-semibold ">
-                                    <InvoiceMenu>
-                                        <DropwDownItem
-                                            type="update"
-                                            invoiceId={invoice.id}
-                                        >
-                                            <Pen size={13} />
-                                            edit
-                                        </DropwDownItem>
-                                        <DropwDownItem
-                                            type="delete"
-                                            invoiceId={invoice.id}
-                                        >
-                                            <Trash size={13} />
-                                            delete
-                                        </DropwDownItem>
-                                        <DropwDownItem invoiceId={invoice.id}>
-                                            <Eye size={13} />
-                                            view details
-                                        </DropwDownItem>
-                                    </InvoiceMenu>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {loading ? (
+                    <InvoiceTableSkeleton />
+                ) : error ? (
+                    <p className="p-4 text-center text-red-500">
+                        Error: {error}
+                    </p>
+                ) : invoices.length === 0 ? (
+                    <div className="p-4 flex items-center flex-col gap-4 min-h-80 justify-center text-center">
+                        <BrushCleaning className="stroke-primary" size={50} />
+                        <p className="text-secondary-foreground/50">
+                            No invoices found.
+                        </p>
+                    </div>
+                ) : (
+                    <InvoiceTable invoices={invoices} />
+                )}
             </div>
         </div>
     );
 };
 
-const DropwDownItem = (props) => {
-    const navigate = useNavigate();
-
-    if (props.type === "delete") {
-        return (
-            <button className={props.className} onClick={props.handleDelete}>
-                {props.children}
-            </button>
-        );
-    }
-    if (props.type === "update") {
-        return (
-            <button className={props.className} onClick={props.handleUpdate}>
-                {props.children}
-            </button>
-        );
-    }
-
-    return (
-        <button
-            className={props.className}
-            onClick={() => navigate(`/invoices/${props.invoiceId}`)}
-        >
-            {props.children}
-        </button>
-    );
-};
 export default Invoices;
