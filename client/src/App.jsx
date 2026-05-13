@@ -4,6 +4,7 @@ import ProtectRoute from "../routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
 import Invoices from "./pages/Invoices";
+import InvoiceDetails from "./pages/InvoiceDetails";
 
 const App = () => {
     return (
@@ -26,10 +27,7 @@ const App = () => {
                     />
 
                     <Route path="/invoices" element={<Invoices />} />
-                    <Route
-                        path="/invoices/:id"
-                        element={<h1>Invoice Details</h1>}
-                    />
+                    <Route path="/invoices/:id" element={<InvoiceDetails />} />
                 </Route>
             </Routes>
         </BrowserRouter>
