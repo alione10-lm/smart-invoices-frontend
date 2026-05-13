@@ -2,10 +2,10 @@ import { X } from "lucide-react"
 import { ModalContext } from "../../contexts/suppliersContext"
 import { useContext } from "react"
 
-const Modal = ({ isOpen, children }) => {
-    const { setIsModalOpen } = useContext(ModalContext)
+const Modal = ({ children }) => {
+    const { isModalOpen, setIsModalOpen } = useContext(ModalContext)
 
-    if(!isOpen) return null
+    if(!isModalOpen) return null
 
   return (
     <div className="fixed inset-0 bg-black/30 flex-center z-50">
