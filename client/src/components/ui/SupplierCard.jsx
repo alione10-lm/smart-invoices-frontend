@@ -1,9 +1,10 @@
 import { Mail, Phone } from "lucide-react"
 import { getInitials } from "../../utils/format"
+import { Link } from "react-router-dom"
 
 const SupplierCard = (supplier) => {
   return (
-    <div className="supplier-card border border-border bg-secondary rounded-lg p-4 text-card-foreground cursor-pointer hover:bg-secondary/80 transition-all duration-75 hover:border-ring hover:scale-1.5">
+    <Link to={`/suppliers/${supplier._id}`} className="supplier-card border border-border bg-secondary rounded-lg p-4 text-card-foreground cursor-pointer hover:bg-secondary/80 transition-all duration-75 hover:border-ring hover:scale-1.5">
         <div className="card_header flex items-center mb-5">
             <div className="avatar flex-center w-12 h-12 rounded-full bg-chart-5 text-white font-bold text-lg">
                 { getInitials(supplier.name) }
@@ -33,7 +34,7 @@ const SupplierCard = (supplier) => {
             <span className="text-xs text-muted-foreground"><span className="text-card-foreground">{supplier.invoiceCount}</span> Invoices</span>
         </div>  
 
-    </div>
+    </Link>
   )
 }
 

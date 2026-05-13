@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export const ModalContext = createContext(null);
+export const ModalContext = createContext(false);
 export const SupplierCreateContext = createContext(null)
 
 // const supplierProvider = ({ children }) => {

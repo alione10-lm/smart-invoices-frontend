@@ -60,7 +60,7 @@ const Suppliers = () => {
           <div className="suppliers-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {suppliers.map((supplier) => (
               <SupplierCard 
-                key={supplier._id} {...supplier}                
+                key={supplier._id} {...supplier}           
             />
             ))}
           </div>
