@@ -1,5 +1,6 @@
-import { CheckCheck, DollarSign, File, Hourglass } from "lucide-react";
-import { useEffect } from "react";
+import { CheckCheck, DollarSign, File, Hourglass, } from "lucide-react";
+import '../styles/dashboard.css';
+import StatsCard from "../components/StatsCard";
 
 const dummyData = {
     success: true,
@@ -20,13 +21,33 @@ const dummyData = {
     },
 };
 
+const getGreeting = () => {
+    const h = new Date().getHours();
+    if (h < 12) return "Good Morning ☀";
+    if (h < 18) return "Good Afternoon 🌤";
+    return "Good Evening 🌙";
+};
+
+const getDate = () => {
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const now = new Date();
+    return `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()} ${now.getFullYear()}`;
+};
+
 const Dashboard = () => {
     return (
-        <div className="">
-            <h1 className="text-sm font-bold mb-5 text-secondary-foreground">
-                welcome back , Oussama
-            </h1>
-            <div className="w-full grid gap-4 grid-cols-4">
+        <div className="dashboard-wrapper">
+
+            <div className="dashboard-header">
+                <div className="dashboard-header-left">
+                    <p className="dashboard-date">{getDate()}</p>
+                    <h1 className="dashboard-greeting">{getGreeting()}</h1>
+                    <p className="dashboard-sub">Here's What's Happening With Your Invoices Today.</p>
+                </div>
+            </div>
+
+            <div className="stats-grid">
                 <StatsCard
                     title="Total Invoices"
                     value={dummyData.data.totalInvoices}
@@ -48,18 +69,7 @@ const Dashboard = () => {
                     icon={<Hourglass />}
                 />
             </div>
-        </div>
-    );
-};
 
-const StatsCard = ({ title, value, icon }) => {
-    return (
-        <div className="p-4 bg-secondary rounded-lg shadow">
-            {icon}
-            <h2 className="text-sm font-medium text-muted-foreground mt-2">
-                {title}
-            </h2>
-            <p className="text-2xl font-bold text-primary">{value}</p>
         </div>
     );
 };

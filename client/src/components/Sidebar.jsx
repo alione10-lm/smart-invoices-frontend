@@ -20,7 +20,7 @@ const NAVLINKS = {
 const Sidebar = () => {
     return (
         <aside className="w-64 min-h-screen border-r border-secondary bg-background  p-4">
-            <h1 className="my-10">smart invoices</h1>
+            <h1 className="my-10">Smart Invoices</h1>
             {Object.entries(NAVLINKS).map(([key, link]) => (
                 <NavLink
                     key={key}
