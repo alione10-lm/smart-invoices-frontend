@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/Layouts/AppLayout";
+import ProtectRoute from "../routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
 import Invoices from "./pages/Invoices";
@@ -10,6 +11,10 @@ const App = () => {
             <Routes>
                 <Route path="/login" element={<h1>login</h1>} />
                 <Route path="/register" element={<h1>register</h1>} />
+                {/* <Route path="/" element={
+                        <ProtectedRoute>
+                           <Dashboard />
+                           </ProtectedRoute> }/> */}
 
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<Dashboard />} />
