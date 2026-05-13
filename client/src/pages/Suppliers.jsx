@@ -10,6 +10,7 @@ import Modal from "../components/ui/Modal.jsx"
 const Suppliers = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [creatSupplier, setCreatSupplier] = useState({})
 
     const [suppliers, setSuppliers] = useState([])
     const [loading, setLoading] = useState(true);
@@ -31,6 +32,36 @@ const Suppliers = () => {
         }
         fetchSuppliers()
     }, [])
+
+    const handler = (e) => {
+        e.preventDefault()
+
+        const from = e.target;
+
+        const data = {
+            name: form.name.value,
+            email: form.email.value,
+            phone: form.phone.value,
+            address: form.address.value,
+            contact: form.contact.value,
+        }
+
+        setCreatSupplier(data)
+        
+    }
+
+    useEffect(() => {
+        const creatSupplierApi = async () => {
+            try{
+                const res = await api.post('/suppliers', creatSupplier);
+
+            }catch(err) {
+                setError(error)
+            }
+        }
+
+        creatSupplier()
+    },[creatSupplier])
 
 
   return (
@@ -56,18 +87,76 @@ const Suppliers = () => {
           {
             isModalOpen && (
                 <Modal isOpen={isModalOpen}>
-                    <div className="flex flex-col items-center justify-center h-full">
+                    <form action=""> 
+
+                    <div className="flex flex-col items-center justify-center gap-5 h-full">
                         <div className="flex flex-col gap-2 w-full">
-                            <label htmlFor="supplier_name" className="text-[12px] font-bold">Supplier Name</label>
+                            <label htmlFor="name" className="text-[12px] font-bold">Supplier Name</label>
+                            <input 
+                               required
+                               type="text"
+                               name="name"
+                               id="name" 
+                               placeholder="Enter supplier name" 
+                               className="input-bordered focus:border p-2 rounded-md focus:border-primary focus:shadow-primary ring ring-ring focus:shadow-lg w-full outline-none"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2 w-full">
+                            <label htmlFor="email" className="text-[12px] font-bold">Supplier Email</label>
                             <input 
                                required
                                type="text" 
-                               id="supplier_name" 
+                               name="email"
+                               id="email" 
                                placeholder="Enter supplier name" 
-                               className="input-bordered focus:border p-2 rounded-lg focus:border-primary focus:shadow-primary focus:shadow-lg w-full outline-none"
+                               className="input-bordered focus:border p-2 rounded-md focus:border-primary focus:shadow-primary ring ring-ring focus:shadow-lg w-full outline-none"
                             />
                         </div>
+
+                        <div className="flex flex-col gap-2 w-full">
+                            <label htmlFor="phone" className="text-[12px] font-bold">Supplier phone</label>
+                            <input 
+                               required
+                               type="text" 
+                               id="phone" 
+                               name="phone"
+                               placeholder="Enter supplier name" 
+                               className="input-bordered focus:border p-2 rounded-md focus:border-primary focus:shadow-primary ring ring-ring focus:shadow-lg w-full outline-none"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2 w-full">
+                            <label htmlFor="saddress" className="text-[12px] font-bold">Supplier address</label>
+                            <input 
+                               required
+                               type="text" 
+                               id="address" 
+                               name="address"
+                               placeholder="Enter supplier name" 
+                               className="input-bordered focus:border p-2 rounded-md focus:border-primary focus:shadow-primary ring ring-ring focus:shadow-lg w-full outline-none"
+                            />
+                        </div>
+
+                        <div className="flex flex-col gap-2 w-full">
+                            <label htmlFor="contact" className="text-[12px] font-bold">Supplier contact</label>
+                            <input 
+                               required
+                               type="text" 
+                               id="contact" 
+                               name="contact"
+                               placeholder="Enter supplier name" 
+                               className="input-bordered focus:border p-2 rounded-md focus:border-primary focus:shadow-primary ring ring-ring focus:shadow-lg w-full outline-none"
+                            />
+                        </div>
+
                     </div>
+
+                    <div className="flex items-center justify-end gap-5 mt-5">
+                        <button className="border border-border py-4 px-5 cursor-pointer hover:border-primary rounded-lg font-bold text-foreground">Cansl</button>
+                        <button type="submet" className="border border-border py-4 px-5 cursor-pointer hover:bg-chart-5 rounded-lg font-bold text-foreground bg-chart-4">Confirm</button>
+                    </div>
+                    </form>
                 </Modal>
             )
           }
