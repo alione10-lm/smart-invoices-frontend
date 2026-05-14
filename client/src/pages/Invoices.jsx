@@ -98,11 +98,11 @@ const Invoices = () => {
                     <p className="p-4 text-center text-red-500">
                         Error: {error}
                     </p>
-                ) : invoices.length === 0 ? (
+                ) : invoices.length === 0 && !loading ? (
                     <div className="p-4 flex items-center flex-col gap-4 min-h-80 justify-center text-center">
                         <BrushCleaning className="stroke-primary" size={50} />
                         <p className="text-secondary-foreground/50">
-                            No invoices found.
+                            No i nvoices found.
                         </p>
                     </div>
                 ) : (
