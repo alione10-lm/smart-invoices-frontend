@@ -44,7 +44,7 @@ export const getSupplierById = async (req, res) => {
 export const getAllSupplier = async (req, res) => {
     try {
 
-        const suppliers = await getAllSupplier_s();
+        const suppliers = await getAllSupplier_s(req.user.id);
 
         ok(res, suppliers)
 
