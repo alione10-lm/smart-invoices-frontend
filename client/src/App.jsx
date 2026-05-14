@@ -4,6 +4,7 @@ import ProtectRoute from "../routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Suppliers from "./pages/Suppliers";
 import Invoices from "./pages/Invoices";
+import SupplierDetail from "./pages/SupplierDetail";
 import InvoiceDetails from "./pages/InvoiceDetails";
 
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
                     <Route path="/suppliers" element={<Suppliers />} />
                     <Route
                         path="/suppliers/:id"
-                        element={<h1>Supplier Details</h1>}
+                        element={<SupplierDetail/>}
                     />
 
                     <Route path="/invoices" element={<Invoices />} />
