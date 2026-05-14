@@ -25,8 +25,8 @@ export const deleteSupplier_s = async (supllier) => {
     return deleted
 }
 
-export const getAllSupplier_s = async () => {
-    const suplliers = await Suppliers.find();
+export const getAllSupplier_s = async (userId) => {
+    const suplliers = await Suppliers.find({userId});
 
     
 
