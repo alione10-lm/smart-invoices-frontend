@@ -107,7 +107,7 @@ const SupplierDetail = () => {
             <Download className="w-4 h-4" />
             Export
           </button>
-          <button className="button_primary">
+          <button className="button_primary" onClick={() => navigate('/invoices?new=1')}>
             <FilePlus className="w-4 h-4" />
             New invoice
           </button>
@@ -133,7 +133,7 @@ const SupplierDetail = () => {
           <span className="text-sm text-muted-foreground">{supplier.invoiceCount ?? 0} total</span>
         </div>
 
-        {supplier.invoices?.length > 0 ? (
+        {supplier.invoises?.length > 0 ? (
           <table className="w-full">
             <thead>
               <tr className="border-b border-border text-xs text-muted-foreground uppercase tracking-wider">
@@ -144,12 +144,12 @@ const SupplierDetail = () => {
               </tr>
             </thead>
             <tbody>
-              {supplier.invoices.map((invoice) => (
+              {supplier.invoises.map((invoice, i) => (
                 <tr
                   key={invoice._id}
                   className="border-b border-border last:border-0 hover:bg-muted/40 transition-colors"
                 >
-                  <td className="py-4 font-semibold text-sm">{invoice.invoiceNumber}</td>
+                  <td className="py-4 font-semibold text-sm">{i+1}</td>
                   <td className="py-4 font-semibold text-sm">
                     ${(invoice.amount ?? 0).toFixed(2)}
                   </td>
