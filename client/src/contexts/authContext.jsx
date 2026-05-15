@@ -9,19 +9,16 @@ function AuthProvider({ children }) {
     const navigate = useNavigate();
 
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(() => localStorage.getItem("token"));
+    const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        const user = localStorage.getItem("user");
-
-        console.log(token);
-
-        if (token && user) {
-            setToken(token);
-            setUser(JSON.parse(user));
+        const storedToken = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
+        if (storedToken && storedUser) {
+            setToken(storedToken);
+            setUser(JSON.parse(storedUser));
         }
     }, []);
 
@@ -41,7 +38,6 @@ function AuthProvider({ children }) {
 
     const login = async ({ email, password }) => {
         setLoading(true);
-        setError(null);
         try {
             const response = await axios.post("/api/auth/login", {
                 email,
@@ -69,7 +65,6 @@ function AuthProvider({ children }) {
         console.log(name, email, password);
 
         setLoading(true);
-        setError(null);
         try {
             const data = await axios.post("api/auth/register", {
                 name,

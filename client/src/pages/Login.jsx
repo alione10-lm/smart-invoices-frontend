@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState("password1111");
     const [error, setError] = useState("");
 
-    const { login } = useAuth();
+    const { login, loading, error: LoginError } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,7 +76,7 @@ const Login = () => {
                     </div>
 
                     <button type="submit" className="btn-signin">
-                        Sign in
+                        {loading ? "Signing in..." : "Sign in"}
                     </button>
 
                     {error && (
