@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/authContext";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const App = () => {
     return (
@@ -30,7 +31,13 @@ const App = () => {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
 
-                        <Route element={<AppLayout />}>
+                        <Route
+                            element={
+                                <ProtectedRoutes>
+                                    <AppLayout />
+                                </ProtectedRoutes>
+                            }
+                        >
                             <Route path="/" element={<Dashboard />} />
 
                             <Route path="/suppliers" element={<Suppliers />} />
