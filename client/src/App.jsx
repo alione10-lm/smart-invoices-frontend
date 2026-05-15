@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./contexts/authContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import AuthRedirect from "./components/AuthRedirect";
 
 const App = () => {
     return (
@@ -28,8 +29,22 @@ const App = () => {
             <BrowserRouter>
                 <AuthProvider>
                     <Routes>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route
+                            path="/login"
+                            element={
+                                <AuthRedirect>
+                                    <Login />
+                                </AuthRedirect>
+                            }
+                        />
+                        <Route
+                            path="/register"
+                            element={
+                                <AuthRedirect>
+                                    <Register />
+                                </AuthRedirect>
+                            }
+                        />
 
                         <Route
                             element={
