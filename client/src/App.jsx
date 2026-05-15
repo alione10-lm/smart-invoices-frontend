@@ -7,25 +7,48 @@ import SupplierDetail from "./pages/SupplierDetail";
 import InvoiceDetails from "./pages/InvoiceDetails";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "./contexts/authContext";
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+        <>
+            <Toaster
+                toastOptions={{
+                    style: {
+                        borderRadius: "8px",
+                        background: "var(--color-secondary)",
+                        color: "#fff",
+                    },
+                }}
+                position="top-right"
+                reverseOrder={true}
+            />
+            <BrowserRouter>
+                <AuthProvider>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
 
-                <Route element={<AppLayout />}>
-                    <Route path="/" element={<Dashboard />} />
+                        <Route element={<AppLayout />}>
+                            <Route path="/" element={<Dashboard />} />
 
-                    <Route path="/suppliers" element={<Suppliers />} />
-                    <Route path="/suppliers/:id" element={<SupplierDetail />} />
+                            <Route path="/suppliers" element={<Suppliers />} />
+                            <Route
+                                path="/suppliers/:id"
+                                element={<SupplierDetail />}
+                            />
 
-                    <Route path="/invoices" element={<Invoices />} />
-                    <Route path="/invoices/:id" element={<InvoiceDetails />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                            <Route path="/invoices" element={<Invoices />} />
+                            <Route
+                                path="/invoices/:id"
+                                element={<InvoiceDetails />}
+                            />
+                        </Route>
+                    </Routes>
+                </AuthProvider>
+            </BrowserRouter>
+        </>
     );
 };
 
