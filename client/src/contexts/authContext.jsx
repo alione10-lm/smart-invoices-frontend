@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -12,6 +12,18 @@ function AuthProvider({ children }) {
     const [token, setToken] = useState(() => localStorage.getItem("token"));
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
+
+        console.log(token);
+
+        if (token && user) {
+            setToken(token);
+            setUser(JSON.parse(user));
+        }
+    }, []);
 
     const saveSession = (userData, token) => {
         setUser(userData);
