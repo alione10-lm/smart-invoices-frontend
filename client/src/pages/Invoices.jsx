@@ -32,25 +32,6 @@ const Invoices = () => {
         getInvoices();
     }, []);
 
-    // useEffect(() => {
-    //     const getSuppliers = async () => {
-    //         try {
-    //             const res = await axios.get("api/suppliers", {
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     ...getAuthHeaders(),
-    //                 },
-    //             });
-    //             const data = await res.data;
-    //             console.log(data);
-    //         } catch (error) {
-    //             console.error("Error fetching suppliers:", error);
-    //         }
-    //     };
-
-    //     getSuppliers();
-    // }, []);
-
     return (
         <div className="">
             {showCreateModal && (

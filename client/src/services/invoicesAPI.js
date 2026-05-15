@@ -70,3 +70,17 @@ export const deleteInvoice = async (id) => {
         throw new Error(`Error deleting invoice with id ${id}:`, error);
     }
 };
+
+export const getSuppliers = async () => {
+    try {
+        const res = await axios.get("/api/suppliers", {
+            headers: {
+                "Content-Type": "application/json",
+                ...getAuthHeaders(),
+            },
+        });
+        return await res.data;
+    } catch (error) {
+        throw new Error("Error fetching suppliers:", error);
+    }
+};

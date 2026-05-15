@@ -1,21 +1,18 @@
 // CreateInvoiceForm.jsx
 
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EMPTY_FORM = { supplierName: "", dueDate: "", amount: "" };
-
-const suppliers = [
-    "MCH Supplies",
-    "Global Tech",
-    "Office Essentials",
-    "Supply Co.",
-    "TechGear",
-];
 
 export function CreateInvoiceForm({ onSubmit, onCancel }) {
     const [form, setForm] = useState(EMPTY_FORM);
     const [errors, setErrors] = useState({});
+
+    const [suppliers, setSuppliers] = useState([]);
+
+    const [supplierError, setSupplierError] = useState(null);
+    const [loadingSuppliers, setLoadingSuppliers] = useState(true);
 
     const validate = () => {
         const e = {};
@@ -43,6 +40,21 @@ export function CreateInvoiceForm({ onSubmit, onCancel }) {
         setForm(EMPTY_FORM);
         setErrors({});
     };
+
+    useEffect(() => {
+        const getSuppliers = async () => {
+            try {
+                const { data } = await getSuppliers();
+                setSuppliers(data);
+            } catch (error) {
+                setSupplierError("Failed to load suppliers. Please try again.");
+            } finally {
+                setLoadingSuppliers(false);
+            }
+        };
+
+        getSuppliers();
+    }, []);
 
     return (
         <form
