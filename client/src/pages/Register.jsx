@@ -1,29 +1,39 @@
 import React, { useState } from "react";
 import { api } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, User, UserPlus } from "lucide-react";
 import "../ui/RegisterStyle.css";
+import { useAuth } from "../contexts/authContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [name, setName] = useState("oussama");
+    const [email, setEmail] = useState("oussama@gmail.com");
+    const [password, setPassword] = useState("password1111");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const { register } = useAuth();
+
     const handleSubmit = async (e) => {
+        console.log({ name, password, email });
+
         e.preventDefault();
         setError("");
 
         try {
-            await api.post("/auth/register", {
-                name,
-                email,
-                password,
-            });
+            await register({ name, email, password });
             navigate("/login");
         } catch (err) {
-            setError(err.response?.data?.message || "An error occurred during registration.");
+            setError(
+                err.response?.data?.message ||
+                    "An error occurred during registration.",
+            );
+
+            toast.error(
+                err.response?.data?.message ||
+                    "An error occurred during registration.",
+            );
         }
     };
 
@@ -92,17 +102,30 @@ const Register = () => {
                         Create account
                     </button>
 
-                    {error && <p style={{ color: "#ff4d4d", fontSize: "13px", marginTop: "12px", textAlign: "center" }}>{error}</p>}
+                    {error && (
+                        <p
+                            style={{
+                                color: "#ff4d4d",
+                                fontSize: "13px",
+                                marginTop: "12px",
+                                textAlign: "center",
+                            }}
+                        >
+                            {error}
+                        </p>
+                    )}
 
                     <div className="signup-link">
-                        Already have an account? <a href="/login">Sign in</a>
+                        Already have an account?{" "}
+                        <Link to="/login">Sign in</Link>
                     </div>
                 </form>
             </div>
 
             <div className="right-panel">
                 <div className="right-tagline">
-                    Join thousands of businesses <span className="highlight">automating their billing</span>.
+                    Join thousands of businesses{" "}
+                    <span className="highlight">automating their billing</span>.
                 </div>
             </div>
         </div>
