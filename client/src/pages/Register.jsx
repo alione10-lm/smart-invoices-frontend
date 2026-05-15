@@ -13,17 +13,15 @@ const Register = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const { register } = useAuth();
+    const { register, loading } = useAuth();
 
     const handleSubmit = async (e) => {
-        console.log({ name, password, email });
-
         e.preventDefault();
         setError("");
 
         try {
             await register({ name, email, password });
-            navigate("/login");
+            // navigate("/login");
         } catch (err) {
             setError(
                 err.response?.data?.message ||
@@ -98,8 +96,12 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn-create">
-                        Create account
+                    <button
+                        type="submit"
+                        className="btn-create"
+                        disabled={loading}
+                    >
+                        {loading ? "Creating account..." : "Create account"}
                     </button>
 
                     {error && (

@@ -66,15 +66,13 @@ function AuthProvider({ children }) {
 
         setLoading(true);
         try {
-            const data = await axios.post("api/auth/register", {
+            await axios.post("api/auth/register", {
                 name,
                 email,
                 password,
             });
 
-            console.log(data);
-
-            // navigate("/login");
+            navigate("/login");
 
             toast.success("Registration successful! Please log in.");
         } catch (err) {
