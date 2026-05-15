@@ -19,6 +19,10 @@ export const createUser = async (data) => {
 export const login_s = async (data) => {
     const user = await Users.findOne({email: data.email}).select('+password')
     
+    if(!user) {
+        return { success: false, message: 'email incorrect' }
+    }
+
     const verifyPassword = await comparPassword(data.password, user.password);
 
     if(!verifyPassword) {

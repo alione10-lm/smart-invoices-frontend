@@ -1,27 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/Layouts/AppLayout";
-import ProtectRoute from "../routes/ProtectedRoute";
+import ProtectedRoute from "../routes/ProtectedRoute";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<h1>login</h1>} />
-                <Route path="/register" element={<h1>register</h1>} />
-                {/* <Route path="/" element={
-                        <ProtectedRoute>
-                           <Dashboard />
-                           </ProtectedRoute> }/> */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
-                <Route element={<AppLayout />}>
+                <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
                     <Route path="/" element={<h1>Dashboard</h1>} />
-
                     <Route path="/suppliers" element={<h1>Suppliers</h1>} />
                     <Route
                         path="/suppliers/:id"
                         element={<h1>Supplier Details</h1>}
                     />
-
                     <Route path="/invoices" element={<h1>Invoices</h1>} />
                     <Route
                         path="/invoices/:id"
