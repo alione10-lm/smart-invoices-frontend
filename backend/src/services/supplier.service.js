@@ -1,3 +1,4 @@
+import Invoices from "../models/Invoice.js";
 import { Suppliers } from "../models/Supplier.js"
 
 
@@ -27,8 +28,6 @@ export const deleteSupplier_s = async (supllier) => {
 
 export const getAllSupplier_s = async (userId) => {
     const suplliers = await Suppliers.find({userId});
-
-    
 
     return suplliers
 }

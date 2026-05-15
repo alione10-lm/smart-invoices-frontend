@@ -8,6 +8,7 @@ export const verifySupplierOwnership = async (req, res, next) => {
     try {
         const supplier = await Suppliers.findById(req.params.id);
 
+
         if (!supplier) {
             return notFound(res, "supplier not found");
         }
@@ -16,7 +17,16 @@ export const verifySupplierOwnership = async (req, res, next) => {
             return forbidden(res);
         }
 
-        req.supplier = supplier;
+        supplier.toObject();
+        const invoises = await Invoices.find({supplierId: supplier._id})
+        const invoiceCount = invoises.length
+
+        req.supplier = {
+            ...supplier.toObject(),
+            invoises,
+            invoiceCount
+        };
+
 
         next();
     } catch (error) {
