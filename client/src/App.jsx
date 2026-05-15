@@ -11,12 +11,8 @@ const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/login" element={<h1>login</h1>} />
-                <Route path="/register" element={<h1>register</h1>} />
-                {/* <Route path="/" element={
-                        <ProtectedRoute>
-                           <Dashboard />
-                           </ProtectedRoute> }/> */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
 
                 <Route element={<AppLayout />}>
                     <Route path="/" element={<Dashboard />} />
